@@ -1,5 +1,4 @@
 def removeNames(file):
-    f = open(file)
 
     REMOVE_LIST = ['STATION', 'REPORTTPYE', 'HOURLYPRSENTWEATHERTYPE',
                   'HOURLYDRYBULBTEMPC', 'HOURLYWETBULBTEMPC', 'HOURLYDewPointTempC',
@@ -31,3 +30,20 @@ def removeNames(file):
         print(",".join(tmpLine), end="")
 
     f.close()
+
+def removeColumns(file):
+    LAST_COLUMN = "HOURLYPrecip"
+
+    f = open(file)
+
+    header = f.readline().split(",")
+
+    removeIndex = header.index(LAST_COLUMN)
+
+    print(",".join(header[:removeIndex + 1]))
+
+    for line in f:
+        splitLine = line.split(",")
+
+        print(",".join(splitLine[:removeIndex + 1]))
+
