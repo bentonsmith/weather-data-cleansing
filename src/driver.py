@@ -4,6 +4,7 @@ from cols import removeNames, removeColumns
 from aggregate import removeAggregate
 from scramble import addErrors
 from usage import usage
+from findErrors import findErrors
 
 
 if len(sys.argv) <= 1:
@@ -16,6 +17,8 @@ elif sys.argv[1] == "prepareFile":
     os.remove("temp2.csv")
 elif sys.argv[1] == "addErrors":
     addErrors(sys.argv[2])
+elif sys.argv[1] == "findErrors":
+    findErrors(sys.argv[2])
 else:
     usage()
     print(sys.argv)
