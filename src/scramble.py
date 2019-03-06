@@ -1,6 +1,6 @@
 import random
 
-FILE_LENGTH = 115_000
+FILE_LENGTH = 110_000
 
 
 def addErrors(file):
