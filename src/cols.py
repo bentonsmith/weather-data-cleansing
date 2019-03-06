@@ -46,4 +46,3 @@ def removeColumns(file):
         splitLine = line.split(",")
 
         print(",".join(splitLine[:removeIndex + 1]))
-
