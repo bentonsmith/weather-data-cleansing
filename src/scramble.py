@@ -5,10 +5,11 @@ FILE_LENGTH = 115_000
 
 def addErrors(file):
     f = open(file)
+    f2 = open("error-file.csv", "w")
 
     header = f.readline().split(",")
 
-    print(",".join(header), end="")
+    print(",".join(header), end="", file=f2)
 
     randomErrors = [random.randint(1, FILE_LENGTH) for i in range(20)]
 
@@ -20,9 +21,9 @@ def addErrors(file):
             changeLine = line.split(",")
             errorNumber = random.randint(1, 5)
             printLine = ",".join(makeError(errorNumber, changeLine, header))
-            print(printLine, end="")
+            print(printLine, end="", file=f2)
         else:
-            print(line, end="")
+            print(line, end="", file=f2)
 
 
 def makeError(errorNumber, line, header):

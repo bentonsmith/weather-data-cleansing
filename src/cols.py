@@ -1,4 +1,4 @@
-def removeNames(file):
+def removeNames(file, destination):
 
     REMOVE_LIST = ['STATION', 'REPORTTPYE', 'HOURLYPRSENTWEATHERTYPE',
                   'HOURLYDRYBULBTEMPC', 'HOURLYWETBULBTEMPC', 'HOURLYDewPointTempC',
@@ -8,6 +8,7 @@ def removeNames(file):
     indexList = []
 
     f = open(file)
+    f2 = open(destination, "w")
 
     header = f.readline().split(",")
 
@@ -19,7 +20,7 @@ def removeNames(file):
     for index in range(len(header)):
         if index not in indexList:
             newHeader.append(header[index])
-    print(",".join(newHeader), end="")
+    print(",".join(newHeader), end="", file=f2)
 
     for line in f:
         tmpLine = []
@@ -27,22 +28,27 @@ def removeNames(file):
         for index in range(len(newLine)):
             if index not in indexList:
                 tmpLine.append(newLine[index])
-        print(",".join(tmpLine), end="")
+        print(",".join(tmpLine), end="", file=f2)
 
     f.close()
+    f2.close()
 
-def removeColumns(file):
+def removeColumns(file, destination):
     LAST_COLUMN = "HOURLYPrecip"
 
     f = open(file)
+    f2 = open(destination, "w")
 
     header = f.readline().split(",")
 
     removeIndex = header.index(LAST_COLUMN)
 
-    print(",".join(header[:removeIndex + 1]))
+    print(",".join(header[:removeIndex + 1]), file=f2)
 
     for line in f:
         splitLine = line.split(",")
 
-        print(",".join(splitLine[:removeIndex + 1]))
+        print(",".join(splitLine[:removeIndex + 1]), file=f2)
+
+    f.close()
+    f2.close()
