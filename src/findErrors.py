@@ -20,24 +20,23 @@ def findErrors(file):
     print("You have selected the " + header[column] + " column.")
     while not valid:
         maxVal = input("Enter the maximum acceptable value: ")
-        if maxVal.isdigit():
-            maxVal = int(maxVal)
-            valid = True
-        elif maxVal.isdecimal():
+        try:
             maxVal = float(maxVal)
+            valid = True
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
 
     valid = False
     while not valid:
         minVal = input("Enter the minimum acceptable value: ")
-        if minVal.isdigit():
-            minVal = int(minVal)
-            valid = True
-        elif minVal.isdecimal():
+        try:
             minVal = float(minVal)
             valid = True
-        else:
-            minVal = float(minVal)
-            valid = True
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
+
 
     lineNumber = 0
     for line in f:
@@ -46,11 +45,9 @@ def findErrors(file):
         newLine = line.split(",")
         checkItem = newLine[column]
 
-        if checkItem.isdigit():
-            checkItem = int(checkItem)
-        elif checkItem.isdecimal() or checkItem.isnumeric():
+        try:
             checkItem = float(checkItem)
-        else:
+        except ValueError:
             continue
 
         if minVal <= checkItem <= maxVal:
